@@ -4,7 +4,7 @@ Type: grilling
 Status: open
 Blocked by: 01
 
-> Reshaped after telemetry was ruled out of scope. Previously "How the floor's effect gets measured" — a quantitative before/after study. Effectiveness is now judged qualitatively instead, which changes the question but does not remove it: a judge with no rubric is just a vibe.
+> Reshaped when measurement was deferred to the final phase. Previously "How the floor's effect gets measured" — a quantitative before/after study, now handled by [What telemetry can attribute token spend and quality to a repo](02-what-telemetry-attributes-cost-and-quality-to-a-repo.md) much later. This ticket is the **qualitative** judging that every earlier phase relies on, and it must work with no telemetry whatsoever. A judge with no rubric is just a vibe.
 
 ## Question
 
