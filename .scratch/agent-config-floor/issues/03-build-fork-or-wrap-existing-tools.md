@@ -1,7 +1,7 @@
 # Build, fork, or wrap the existing audit tools
 
 Type: research
-Status: open
+Status: resolved
 
 ## Question
 

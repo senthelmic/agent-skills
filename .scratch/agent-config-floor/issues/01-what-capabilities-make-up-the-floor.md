@@ -1,7 +1,7 @@
 # What capabilities make up the floor
 
 Type: grilling
-Status: open
+Status: claimed
 
 ## Question
 
