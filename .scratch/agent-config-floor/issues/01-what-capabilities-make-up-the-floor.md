@@ -42,3 +42,15 @@ Ranked by what fails first in a repo with no config at all:
 ### What this ticket did NOT settle
 
 **Present versus correct.** The floor is defined as capabilities that must exist. Whether "exists" is enough, or each item must also be *accurate*, is deliberately left to the judging rubric ticket. Items 4–6 can trivially be satisfied by an empty file that helps nobody, so at least those need a correctness bar.
+
+### Named mandatory artefacts
+
+Capabilities 4–6 say a repo must have *some* skills, prompts and sub-agents. This section names the specific ones that are required by name, regardless of stack. **Carry these into implementation.**
+
+- **A code-review skill or prompt.** Mandatory in every repo, whatever the stack. Added after the capability list was settled.
+
+Two things this raises, for whoever picks up the affected tickets:
+
+- **It is the first named entry in the catalogue, and it is stack-independent.** Every other recommendation so far is triggered by detected technology; this one is unconditional. [Where the recommended skills come from](09-where-recommended-skills-come-from.md) must therefore produce at least this one artefact no matter which sourcing option wins — which sets a floor under that decision too.
+- **It sits awkwardly against constraint 10** ("converge on technology, diverge on team"). How a team reviews code is close to the definition of house style, yet this is mandatory for everyone. The likely resolution is that the *mandatory* part is having a code-review artefact at all, while its content stays the team's own — but that should be confirmed rather than assumed.
+

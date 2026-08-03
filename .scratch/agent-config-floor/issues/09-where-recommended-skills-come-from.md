@@ -23,4 +23,6 @@ Pressure to apply:
 - **What stops the catalogue from becoming the standardisation this effort forbids?** Constraint 10 says technology skills are shareable and working-style skills are house style. Does that line hold under pressure, and who polices it?
 - **Does the catalogue need to exist in phase one?** Or can phase one recommend *that* a team needs a React skill without supplying one? Ugly, but it decouples the tooling from the content problem entirely.
 
+**One artefact is already mandatory by name: a code-review skill or prompt**, required in every repo regardless of stack (see [What capabilities make up the floor](01-what-capabilities-make-up-the-floor.md), "Named mandatory artefacts"). Whichever sourcing option wins must deliver at least this one. If the answer is "we author nothing", this artefact is the counter-example that has to be handled anyway — so it is a useful test case for each option: work out how a code-review skill would be produced, updated and kept team-specific under each, and the weakest option usually fails there first.
+
 Resolution is the source, the ownership, and the answer for uncovered stacks.
