@@ -1,0 +1,5 @@
+# Agent worktrees created for background subagents — never part of the repo
+.claude/worktrees/
+
+# Local Claude Code overrides
+.claude/settings.local.json
