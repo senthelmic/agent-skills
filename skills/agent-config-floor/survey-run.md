@@ -108,7 +108,11 @@ call**. Findings under criteria 1, 2 and 4 are facts.
 
 For every artefact the repository should have and does not, write a stub at its
 correct path. Follow [reference/stubs.md](reference/stubs.md) exactly: the
-paths, the one-line format, and the two rules.
+paths, the format, the two rules, and how the cap counts.
+
+Floor artefacts are never capped. Recommended stack skills are capped at five,
+ranked by which would most change what an agent writes here, and every one you
+did not stub is named in the report with its evidence.
 
 Never overwrite a file that has real content. If a file exists and carries a
 `TODO(floor):` marker, leave it as it is — it is already a stub.

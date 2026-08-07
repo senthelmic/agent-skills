@@ -71,7 +71,12 @@ target is `claude`.>
 
 <Each stub path, one per line, with the sentence it carries. Then: "<n> of <n>
 are still unfilled." Say plainly that a stub counts as absent and is not
-progress.>
+progress.
+
+Then, if stack detection recommended more skills than the cap allows, name
+every one that did not get a stub, with its evidence. Say that filling a stub
+frees a slot and re-running the survey will write the next ones. Nothing is
+dropped silently.>
 
 ## What this report does not tell you
 
