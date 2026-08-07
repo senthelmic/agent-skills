@@ -36,6 +36,13 @@ The only prerequisite is an agent — which is the thing this skill exists to he
 the team adopt. There is no CLI, no npm package, no Node dependency, no server,
 and no telemetry.
 
+**Reading the rest of this skill.** Every link below is relative. Resolve each
+one against the location you loaded *this* file from, whether that was a URL or
+a local path. If you fetched this over the network, fetch the linked file from
+the same directory. Do not fetch a file until you actually need it — the survey
+run needs only `floor.md`, `survey-run.md` and the four files those two point
+to.
+
 **Always latest, never pinned.** The floor's version travels with the skill, so
 a team learns the floor moved by running it, never by being told.
 
