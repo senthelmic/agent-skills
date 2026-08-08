@@ -1,8 +1,8 @@
 # The survey run
 
 Cheap, bounded, always first. It reads a fixed set of files, reports what the
-agents cannot do here yet, and writes a stub for every artefact the repository
-should have.
+agents cannot do here yet, writes a stub for every artefact the repository
+should have, and lists everything else worth building.
 
 It must fit in one session on a 5,000-file monorepo, and two surveys of an
 unchanged repository must produce the same gap list.
@@ -44,7 +44,13 @@ descend to make sense of it.
 
 ---
 
-## Step 2 — detect the stack
+## Step 2 — detect the stack and build the recommendation list
+
+Three passes, all over the files you already read in step 1. **None of them
+reads anything new.** Together they produce the ranked list that becomes
+`.agent-floor/backlog.md` in step 6.
+
+### 2a — skills, from the stack
 
 **Manifest presence is the trigger.** For each manifest you read, record the
 dependencies it declares.
@@ -59,12 +65,59 @@ Rules:
 - **More than one manifest means a monorepo.** Recommendations are then
   **per-package**, each labelled with the path of its manifest. The **floor
   itself stays per-repository**, because the agents read from the root.
-- **No manifests at all means greenfield.** The interview in any later artefact
-  run goes to greenfield mode. Say so in the report.
+- **No manifests at all means greenfield.** The interview in any later build run
+  goes to greenfield mode. Say so in the report.
 
 Which libraries deserve a skill of their own is a judgement about the library,
 not a rule in a detector. Recommend a skill where a library is easy to misuse or
 has a steep learning curve. Carry the evidence line every time.
+
+### 2b — saved prompts, from repeated operations
+
+A saved prompt is worth writing where the team **runs the same non-obvious
+operation again and again**. Three places in the step 1 budget show that, and no
+others:
+
+| Evidence | What it suggests |
+|---|---|
+| A job in a CI workflow that is not build or test | release, publish, deploy, codegen, seed, backfill |
+| A manifest script that is not `build`, `test`, `lint` or `start` | migrate, generate, sync, e2e, storybook |
+| A README section giving a multi-step manual procedure | the procedure itself |
+
+An operation that is one command with no arguments does **not** need a saved
+prompt — the developer types the command. Recommend one where the operation has
+steps, ordering, or preconditions a person has to remember.
+
+### 2c — sub-agents, from shape
+
+A sub-agent is worth handing work to when the work **reads a lot and returns a
+little**, or needs a different set of tools. Judge that from the depth-2
+directory listing and the counts you already took:
+
+| Evidence | What it suggests |
+|---|---|
+| A directory far larger than its siblings | a read-only exploration agent scoped to it |
+| A migrations directory with many files | a migration reviewer |
+| A directory named for a sensitive area — `auth`, `billing`, `payments`, `security` | a review agent scoped to it |
+| A published API surface — an SDK, a public package, an OpenAPI spec | a documentation agent |
+
+### The rule that governs all three
+
+**Do not invent an artefact to fill a capability.** If the evidence does not
+support a recommendation, the list is short, and the backlog says so plainly. A
+padded list is worse than a short one: it teaches the team that this tool
+guesses.
+
+Every recommendation, of every type, carries the evidence line that produced it.
+
+### Rank the whole list
+
+Rank all three types together, by **which artefact would most change what an
+agent writes in this repository**. The mandatory code-review artefact ranks
+first, because it is required whatever the stack.
+
+The ranking is used twice: it decides which recommendations get a stub file in
+step 5, and it is the order of the backlog in step 6.
 
 ---
 
@@ -110,37 +163,59 @@ For every artefact the repository should have and does not, write a stub at its
 correct path. Follow [reference/stubs.md](reference/stubs.md) exactly: the
 paths, the format, the two rules, and how the cap counts.
 
-Floor artefacts are never capped. Recommended stack skills are capped at five,
-ranked by which would most change what an agent writes here, and every one you
-did not stub is named in the report with its evidence.
+Floor artefacts are never capped. Recommendations from step 2 are capped at
+five stub files, taken in rank order.
+
+**The cap bounds files on disk, never what the team is told.** Everything above
+the cap goes into the backlog in step 6, in full, with its evidence. Nothing is
+dropped.
 
 Never overwrite a file that has real content. If a file exists and carries a
 `TODO(floor):` marker, leave it as it is — it is already a stub.
 
 ---
 
-## Step 6 — write the report
+## Step 6 — write the backlog
+
+Write `.agent-floor/backlog.md`, following
+[reference/backlog-template.md](reference/backlog-template.md) exactly.
+
+**Every recommendation from step 2 gets a row**, of every type, whether or not
+it got a stub file. This is the exhaustive list; the stub set is a sample of it.
+
+If a backlog already exists, **merge into it — never replace it**. The merge
+rules are in the template. A row the team added by hand survives untouched, and
+no row is ever deleted.
+
+---
+
+## Step 7 — write the report
 
 Write `.agent-floor/report.md`, following
 [reference/report-template.md](reference/report-template.md) exactly.
 
 The report states how many stubs remain unfilled. A repository sitting at eight
-empty stubs is told so plainly and is not counted as having made progress.
+empty stubs is told so plainly and is not counted as having made progress. The
+report does not repeat the backlog; it points at it.
 
 **If the repository is already above the floor**, write three lines confirming
-that and nothing else. No congratulations, no offer of further help.
+that and nothing else. No congratulations, no offer of further help. Still write
+the backlog: being above the floor does not mean there is nothing left worth
+building.
 
 ---
 
-## Step 7 — end the run
+## Step 8 — end the run
 
 Tell the developer:
 
-1. Where the report is.
+1. Where the report is, and where the backlog is.
 2. The list of unfilled stubs, so they can pick one.
-3. That filling one is a separate run, and they can do it whenever they like.
+3. That filling one is a separate run, done by a separate skill, and they can do
+   it whenever they like. Give them the line from
+   [SKILL.md](SKILL.md), "Filling an artefact".
 
-Then stop. Do not begin an artefact run unless the developer picks an artefact.
+Then stop. Do not begin filling an artefact yourself.
 
 ---
 
@@ -156,3 +231,12 @@ bought by construction, not by hope:
 
 Criterion 3 genuinely needs judgement, so its findings are disclosed as
 judgement calls rather than pretending to be reproducible.
+
+**The recommendation list is not held to this standard, and must not claim to
+be.** The gap list is what has to be stable — a team told twice that they are
+missing different things has been told nothing. The backlog is a set of
+suggestions, it rests on judgement in passes 2b and 2c, and two runs may
+reasonably rank it differently or surface different rows.
+
+That is why the backlog **merges rather than replaces**: a row that appeared
+once is kept, so variation between runs adds to the list instead of churning it.

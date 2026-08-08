@@ -8,6 +8,11 @@ convention that does not exist.
 strict about filler and lenient about length. Four true, specific rules beat
 thirty generic ones.
 
+**Read [../baselines/coding-standards.md](../baselines/coding-standards.md) first.** This file is the
+mechanics; the baseline is what a good one looks like, and the team may have
+replaced it. See
+[../reference/baseline-resolution.md](../reference/baseline-resolution.md).
+
 ---
 
 ## Step 1 — read

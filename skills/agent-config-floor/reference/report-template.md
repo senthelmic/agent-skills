@@ -73,10 +73,9 @@ target is `claude`.>
 are still unfilled." Say plainly that a stub counts as absent and is not
 progress.
 
-Then, if stack detection recommended more skills than the cap allows, name
-every one that did not get a stub, with its evidence. Say that filling a stub
-frees a slot and re-running the survey will write the next ones. Nothing is
-dropped silently.>
+Then one line pointing at `.agent-floor/backlog.md` for everything else worth
+building, and saying that filling a stub frees a slot so the next survey writes
+the next ones. Do not repeat the backlog here — one list, one place.>
 
 ## What this report does not tell you
 
@@ -115,3 +114,6 @@ Nothing to do.
 ```
 
 No congratulations, no score, no offer of further help, no upsell.
+
+The backlog is still written. Being above the floor does not mean there is
+nothing left worth building, and the backlog is a menu rather than a demand.

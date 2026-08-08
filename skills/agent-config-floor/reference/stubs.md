@@ -91,12 +91,19 @@ any of them would hide part of the floor.
 For target `copilot`, use `.github/skills/`, `.github/prompts/<name>.prompt.md`
 and `.github/agents/<name>.md` instead. See [paths.md](paths.md).
 
-### Stack skills — capped at five
+### Recommended artefacts — capped at five stub files
 
-Recommended skills come from stack detection and are the only unbounded set. Cap
-them at **five**. Rank by which skill would most change what an agent writes in
-this repository, and **name the ones you did not stub in the report**, with
-their evidence, so nothing is silently dropped.
+Recommendations come from step 2 of the survey run — skills from the stack,
+saved prompts from repeated operations, sub-agents from repository shape. They
+are the only unbounded set, so the stub files are capped at **five**, taken in
+rank order across all three types together.
+
+**The cap bounds files on disk. It does not bound the recommendation.**
+Everything above the cap is written into
+[backlog-template.md](backlog-template.md)'s file, `.agent-floor/backlog.md`,
+with its evidence and its proposed path. The cap exists because a file tree full
+of placeholders is clutter — not because a team should be told less than we
+know.
 
 **Name the stubs from what you detected**, not from a generic list. If the
 manifests show React and Prisma, the stubs are `.claude/skills/react/SKILL.md`
@@ -113,16 +120,24 @@ saved prompt at `.claude/commands/deploy.md` and its Copilot copy at
 are written; they count once.
 
 **The cap counts only stubs that are still unfilled.** Filling a stub frees a
-slot. When the developer has filled two stack-skill stubs and re-runs the
-survey, the run may write up to two more, taking the next ones by rank. This is
-how a repository with many detected libraries works through them over time
-instead of being permanently limited to the first five.
+slot. When the developer has filled two stubs and re-runs the survey, the run
+may write up to two more, taking the next ones by rank from the backlog. This is
+how a repository with many recommendations works through them over time instead
+of being permanently limited to the first five.
 
 ---
 
-## Stubs and the report
+## Stubs, the report and the backlog
 
-**The report states how many stubs remain unfilled**, and names every
-recommended skill that did not get one. A repository stalled at eight empty
+Three outputs, three jobs. Keep them separate.
+
+| File | Job |
+|---|---|
+| The stubs | Put the shape of a configured repository in the file tree, where a pull request will show it. Capped. |
+| `.agent-floor/report.md` | Say what the agents cannot do here yet. States how many stubs are unfilled. |
+| `.agent-floor/backlog.md` | The exhaustive list of everything worth building, ranked, with evidence. Not capped. |
+
+**The report states how many stubs remain unfilled** and points at the backlog
+for the rest. It does not repeat the list. A repository stalled at eight empty
 stubs is told so plainly, and is not counted as progress. Stubs are not
-achievements.
+achievements, and neither is a long backlog.

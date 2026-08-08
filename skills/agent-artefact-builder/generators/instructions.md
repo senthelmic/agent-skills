@@ -5,14 +5,19 @@ and where its code lives. Capability 3 lives in the same file but has its own
 generator; see [coding-standards.md](coding-standards.md).
 
 **Writes to** `CLAUDE.md` or `.github/copilot-instructions.md`, depending on the
-target. See [../reference/paths.md](../reference/paths.md).
+target. See [../../agent-config-floor/reference/paths.md](../../agent-config-floor/reference/paths.md).
+
+**Read [../baselines/instructions.md](../baselines/instructions.md) first.** This file is the
+mechanics; the baseline is what a good one looks like, and the team may have
+replaced it. See
+[../reference/baseline-resolution.md](../reference/baseline-resolution.md).
 
 ---
 
 ## Step 1 — try the vendor first
 
 - Target includes Claude Code → tell the developer to run `/init`, then check
-  and complete its output against [../floor.md](../floor.md).
+  and complete its output against [../../agent-config-floor/floor.md](../../agent-config-floor/floor.md).
 - Target is Copilot on VS Code → tell them to run "Chat: Generate
   Instructions", then check and complete its output.
 - Target is Copilot on JetBrains, Visual Studio or Xcode, or no vendor
@@ -117,5 +122,5 @@ find it in a manifest, a CI workflow or the README.
 ## Step 6 — the Copilot copy
 
 If the target is `both`, write `.github/copilot-instructions.md` from this file,
-following [../reference/copilot-translation.md](../reference/copilot-translation.md).
+following [../../agent-config-floor/reference/copilot-translation.md](../../agent-config-floor/reference/copilot-translation.md).
 **Flatten every `@import`** — Copilot does not follow them.

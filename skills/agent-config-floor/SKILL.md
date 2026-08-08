@@ -1,6 +1,6 @@
 ---
 name: agent-config-floor
-description: Find out what Claude Code and GitHub Copilot cannot do in this repo yet, and help the team fill the gaps one artefact at a time. Use when a repo has little or no agent configuration, when someone asks what config an agent needs here, or when they ask to set up CLAUDE.md, copilot-instructions, skills, saved prompts, or sub-agents.
+description: Survey a repository and report what Claude Code and GitHub Copilot cannot do in it yet, writing stubs and a ranked backlog of everything worth building. Use when a repo has little or no agent configuration, when someone asks what config an agent needs here, or when they ask to audit or set up agent config. To then build one of those artefacts, use agent-artefact-builder instead.
 ---
 
 # The agent config floor
@@ -13,15 +13,40 @@ GitHub Copilot can actually work in it.
 ## What this skill is, in one paragraph
 
 The **floor** is the minimum agent configuration every repository should have.
-It is a minimum, never a template. This skill has two kinds of run. The
-**survey run** is cheap and bounded: it reads a fixed set of files, reports what
-the agents cannot do here yet, and writes a one-line placeholder file (a
-**stub**) at the correct path for every artefact the repo should have. An
-**artefact run** is opt-in and fills exactly one of those stubs with real
-content.
+It is a minimum, never a template. This skill does the **survey run**: cheap and
+bounded, it reads a fixed set of files, reports what the agents cannot do here
+yet, writes a one-line placeholder file (a **stub**) at the correct path for
+every artefact the repo should have, and lists everything else worth building.
 
-The team works through the stubs at whatever pace suits them. Nothing forces
-them past the survey run.
+Filling one of those in is a separate skill, run separately, whenever the team
+likes. Nothing forces them past the survey run.
+
+## Three outputs, three jobs
+
+| Output | Job | Capped? |
+|---|---|---|
+| The stubs | Put the shape of a configured repository into the file tree, where a pull request will show it | Yes — five, beyond the floor artefacts |
+| `.agent-floor/report.md` | Say what the agents cannot do here yet | — |
+| `.agent-floor/backlog.md` | The exhaustive ranked list of everything worth building here, of every type, with evidence | **No** |
+
+**The stub cap bounds files on disk. It never bounds what the team is told.** A
+file tree full of placeholders is clutter; a short list of recommendations when
+we know more is a different and worse problem. The backlog exists so neither
+happens.
+
+## Filling an artefact
+
+A separate skill: [agent-artefact-builder](../agent-artefact-builder/SKILL.md).
+It fills one artefact per run, reads the backlog and the report, and takes the
+team's own baselines and the developer's own instructions as input.
+
+Point the developer at it. **Do not fill an artefact from this skill.**
+
+> Fetch `<published URL of agent-artefact-builder/SKILL.md>` and follow it.
+
+The two skills sit side by side in the same directory, over a URL and in a local
+clone alike. When resolving a `../agent-artefact-builder/…` link, **resolve the
+`..` yourself before fetching — never send a URL containing `..`.**
 
 ## How a team gets this
 
@@ -80,21 +105,17 @@ is authored and which is generated from it. See
 
 If the developer does not answer, use `both`.
 
-## Step 2 — choose the run
+## Step 2 — do the survey run
 
-**If this is the first time in this repo, or `.agent-floor/report.md` does not
-exist:** do the survey run. Follow [survey-run.md](survey-run.md).
+Follow [survey-run.md](survey-run.md), start to finish.
 
-**If a report already exists and the developer wants to fill an artefact:** do
-an artefact run for that one artefact. Follow
-[artefact-run.md](artefact-run.md).
+**If a report already exists and the developer wants to fill an artefact**,
+this is not the skill for that. Point them at
+[agent-artefact-builder](../agent-artefact-builder/SKILL.md) and stop.
 
-**If the developer has not said which:** do the survey run first and then offer
-the list of unfilled stubs, so they can pick one. Do not start an artefact run
-without the developer choosing the artefact.
-
-Never do more than one artefact run without being asked. The whole design
-depends on runs being small and separate.
+**If the developer has not said which they want:** do the survey run, then offer
+the unfilled stubs and the top backlog rows so they can pick one — and hand off.
+The whole design depends on runs being small and separate.
 
 ## The six capabilities
 
@@ -120,13 +141,15 @@ technology stack: a code-review skill or saved prompt.** It is mandatory to
 |---|---|
 | [floor.md](floor.md) | The rubric. Read it when checking a repo *and* when generating for one, so the two cannot drift apart. |
 | [survey-run.md](survey-run.md) | The survey run, start to finish. |
-| [artefact-run.md](artefact-run.md) | The artefact run, start to finish. |
 | [reference/paths.md](reference/paths.md) | Which path each artefact goes to, per target. |
 | [reference/reach-matrix.md](reference/reach-matrix.md) | Which Copilot surfaces read which file. Versioned data this toolkit owns. |
 | [reference/report-template.md](reference/report-template.md) | The exact shape of `.agent-floor/report.md`. |
+| [reference/backlog-template.md](reference/backlog-template.md) | The exact shape of `.agent-floor/backlog.md`, and the merge rules. |
 | [reference/stubs.md](reference/stubs.md) | The stub format and the stub set. |
 | [reference/copilot-translation.md](reference/copilot-translation.md) | Claude-native to Copilot conversion, and what is lost. |
-| [generators/](generators/) | One generator per artefact. Never one generator that writes everything. |
+
+`floor.md`, `paths.md`, `copilot-translation.md` and `backlog-template.md` are
+also read by the builder skill. They are shared, not copied — copies drift.
 
 ## What this skill deliberately does not do
 

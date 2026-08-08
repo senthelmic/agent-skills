@@ -9,6 +9,11 @@ translated copy at `.github/prompts/<name>.prompt.md`.
 translated once, and the translation is lossy. Say that to the developer before
 starting, so the doubled work is not a surprise.
 
+**Read [../baselines/saved-prompt.md](../baselines/saved-prompt.md) first.** This file is the
+mechanics; the baseline is what a good one looks like, and the team may have
+replaced it. See
+[../reference/baseline-resolution.md](../reference/baseline-resolution.md).
+
 ---
 
 ## What a saved prompt is for
@@ -71,7 +76,7 @@ Rules:
 ## Step 4 — translate, if the target is `both`
 
 Write `.github/prompts/<name>.prompt.md`, following
-[../reference/copilot-translation.md](../reference/copilot-translation.md).
+[../../agent-config-floor/reference/copilot-translation.md](../../agent-config-floor/reference/copilot-translation.md).
 
 The main loss: `$ARGUMENTS` is positional in Claude Code and named in Copilot
 (`${input:name}`). Invent a readable input name and say in the body what it

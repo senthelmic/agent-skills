@@ -6,6 +6,11 @@ This is one file read in two directions. The survey run checks a repository
 against it. Every generator writes toward it. Keeping it in one file is what
 stops the check and the generation from slowly disagreeing with each other.
 
+**The generators live in the sibling skill, `agent-artefact-builder`, and read
+this file across the directory boundary rather than keeping a copy.** Two copies
+of a rubric is exactly the drift this file exists to prevent, so if the two
+skills are ever separated, this file travels with both or the split is wrong.
+
 ---
 
 ## The four criteria
@@ -105,9 +110,11 @@ or its technology stack.
 has no code-review artefact under capability 4 or capability 5, capability 4
 fails, whatever else exists.
 
-Which further skills a repository should have comes from its detected stack —
-see [survey-run.md](survey-run.md), stack detection. Recommendations are
-recommendations; only the code-review artefact is mandatory.
+Which further artefacts a repository should have — skills, saved prompts and
+sub-agents alike — comes from [survey-run.md](survey-run.md) step 2, and lands
+in `.agent-floor/backlog.md` in full. Recommendations are recommendations; only
+the code-review artefact is mandatory, and **nothing in the backlog affects any
+capability's status.**
 
 ### 5. Saved prompts
 
@@ -145,7 +152,7 @@ There is no partial status, no score, and no total.
 ## Two rules that keep this honest
 
 **Generate mandates paths. Checking accepts any layout that demonstrably
-reaches the agents.** When this skill writes a file it writes it at the path in
+reaches the agents.** When this toolkit writes a file it writes it at the path in
 [reference/paths.md](reference/paths.md). When it checks a repository it accepts
 whatever layout the reach matrix says works. Failing a well-configured team over
 an unusual layout is the fastest way to make them stop running this.

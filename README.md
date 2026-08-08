@@ -4,7 +4,15 @@ Agent skills for Claude Code and GitHub Copilot.
 
 | Skill | What it does |
 |---|---|
-| [agent-config-floor](skills/agent-config-floor/) | Finds out what Claude Code and GitHub Copilot cannot do in a repository yet, and helps the team fill the gaps one artefact at a time. |
+| [agent-config-floor](skills/agent-config-floor/) | Surveys a repository and reports what Claude Code and GitHub Copilot cannot do in it yet. Writes stubs and a ranked backlog. |
+| [agent-artefact-builder](skills/agent-artefact-builder/) | Builds one of those artefacts properly, using your own baselines and your own instructions. |
+
+The two run in order: survey first, build second, one artefact at a time. They
+are separate skills because the survey must stay cheap and the build must stay
+small, and a single skill doing both drifts toward doing neither well.
+
+There is no CLI, no npm package, no Node dependency, no server and no
+telemetry. The only prerequisite is an agent.
 
 ---
 
@@ -13,21 +21,21 @@ Agent skills for Claude Code and GitHub Copilot.
 The **floor** is the minimum agent configuration every repository should have.
 It is a minimum, never a template.
 
-The skill has two kinds of run:
+The survey run is cheap and bounded. It reads a fixed set of files and writes
+three things:
 
-- **The survey run** is cheap and bounded. It reads a fixed set of files,
-  writes a report at `.agent-floor/report.md` saying what the agents cannot do
-  in this repository yet, and leaves a one-line placeholder file (a **stub**) at
-  the correct path for every artefact the repository should have.
-- **An artefact run** is opt-in and fills exactly one of those stubs with real
-  content. It reads only the directories that artefact concerns, asks at most
-  six questions, and only where the code is ambiguous.
+| Output | What it is |
+|---|---|
+| Stubs | A one-line placeholder file at the correct path for every artefact the repository should have. Capped at five beyond the floor artefacts, so your file tree does not fill with placeholders. |
+| `.agent-floor/report.md` | What the agents cannot do in this repository yet. No score, no grade. |
+| `.agent-floor/backlog.md` | **The exhaustive list** — every artefact worth building here, of every type, ranked, each with the evidence that produced it. Not capped. |
 
-The team works through the stubs at whatever pace suits them. Nothing forces
+The cap on stubs is about your file tree, not about what you are told. Anything
+above the cap is in the backlog with its evidence, and filling a stub frees a
+slot for the next survey.
+
+The team works through the backlog at whatever pace suits them. Nothing forces
 them past the survey run.
-
-There is no CLI, no npm package, no Node dependency, no server and no
-telemetry. The only prerequisite is an agent.
 
 ### How to use it
 
@@ -63,21 +71,27 @@ Then, in the repository you want to set up:
 #### 3. As an installed skill — when you want it to trigger by name
 
 ```sh
-ln -s "$(pwd)/skills/agent-config-floor" ~/.claude/skills/agent-config-floor
+ln -s "$(pwd)/skills/agent-config-floor"     ~/.claude/skills/agent-config-floor
+ln -s "$(pwd)/skills/agent-artefact-builder" ~/.claude/skills/agent-artefact-builder
 ```
 
-Claude Code then loads it like any other skill and routes to it from the
-description in its frontmatter. Remove it with `rm ~/.claude/skills/agent-config-floor`.
+Claude Code then loads them like any other skill and routes from the description
+in their frontmatter.
+
+**Link both, not one.** The builder reads four shared files from
+`../agent-config-floor/`, which only resolves if both sit side by side.
 
 A symlink means edits in this repository take effect immediately, with no
-copying, which makes this the best route while developing the skill.
+copying, which makes this the best route while developing the skills.
 
 ### What it writes into your repository
 
 - `.agent-floor/report.md` — the report. You choose whether to commit it. It
   never counts toward the floor.
+- `.agent-floor/backlog.md` — the exhaustive list. Same: yours to commit or not,
+  and it never counts toward the floor. Add your own rows; a later survey merges
+  rather than replaces, so nothing you write is lost.
 - One stub per missing artefact, at the path that artefact belongs at.
-- On an artefact run, the real artefact, replacing its stub.
 
 That is all. The skill does not install itself into your repository, and it
 never sends anything anywhere.
@@ -90,7 +104,74 @@ never sends anything anywhere.
   generated for your repository, from your repository's own code.
 - It does not measure token spend or response quality. That is a later phase.
 
-### Status
+---
+
+## agent-artefact-builder
+
+Fills in **one** artefact per run — a skill, a saved prompt, a sub-agent,
+project instructions, coding standards, or the code-review artefact. It reads
+only the directories that artefact concerns, asks at most six questions, and
+only where the code disagrees with itself.
+
+Run the floor skill first. This one reads its report and its backlog.
+
+### How to use it
+
+Same three routes as above, with `agent-artefact-builder` in place of
+`agent-config-floor`. Then say which artefact you want:
+
+> Build the `bullmq` skill from the backlog.
+
+### Telling it how you want it built
+
+This is the part worth knowing about. **Three layers of opinion, highest wins.**
+
+| | Layer | Where | Who owns it |
+|---|---|---|---|
+| 1 | Shipped baseline | `skills/agent-artefact-builder/baselines/<type>.md` | this repository |
+| 2 | Your baseline | `.agent-floor/baselines/<type>.md` in **your** repository | you |
+| 3 | What you type | the prompt that starts the run | you, right now |
+
+`<type>` is one of `instructions`, `coding-standards`, `skill`, `code-review`,
+`saved-prompt`, `sub-agent`.
+
+**Layer 1** is this toolkit's opinion about what a good artefact of that type
+looks like — how long, what the `description` must do, what to refuse to write,
+what a reviewer would send back. Read them; they are meant to be argued with.
+
+**Layer 2** is yours. Drop a markdown file at
+`.agent-floor/baselines/skill.md` in your repository and it layers on top. No
+schema — write it as instructions. You only write the points you care about; the
+rest of layer 1 stays in force. The builder never writes this file for you.
+
+**Layer 3** is whatever you type when you start the run:
+
+> Build the `bullmq` skill — focus on retry and backoff, we wrap the worker in
+> `src/queue/worker.ts` and nobody should call the raw API.
+
+That is not a comment. It is input, it beats both other layers, and the run
+repeats it back to you before doing any work so you can correct it early.
+
+**When a higher layer overrides a lower one, the run says so in one line at the
+end.** Silent overriding is how you stop trusting a tool.
+
+### What no baseline can change
+
+Five things are rubric rather than taste, and no layer can waive them:
+
+- every factual claim is checked against the code before it is written
+- a claim that cannot be checked becomes a `TODO(floor):` question, never an
+  assertion
+- required frontmatter is always written — a file the agent cannot load is not a
+  style choice
+- no score, grade or percentage appears anywhere
+- at most six questions per run
+
+Everything else is negotiable.
+
+---
+
+## Status
 
 Phase 1 (Bootstrap), floor version 1.0.0. The spec and the decisions behind it
-are in `.scratch/agent-config-floor/`.
+are in `.scratch/agent-config-floor/` and `.scratch/agent-artefact-builder/`.

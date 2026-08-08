@@ -8,6 +8,11 @@ translated copy at `.github/agents/<name>.md`.
 **Not portable.** Same doubling as saved prompts, and the routing behaviour
 differs between the two agents even when the file translates cleanly.
 
+**Read [../baselines/sub-agent.md](../baselines/sub-agent.md) first.** This file is the
+mechanics; the baseline is what a good one looks like, and the team may have
+replaced it. See
+[../reference/baseline-resolution.md](../reference/baseline-resolution.md).
+
 ---
 
 ## What a sub-agent is for
@@ -79,7 +84,7 @@ Rules:
 ## Step 4 — translate, if the target is `both`
 
 Write `.github/agents/<name>.md`, following
-[../reference/copilot-translation.md](../reference/copilot-translation.md).
+[../../agent-config-floor/reference/copilot-translation.md](../../agent-config-floor/reference/copilot-translation.md).
 
 `name`, `description` and the body carry over. Tool names differ — drop what has
 no counterpart and note the drop. Drop `model`; there is no reliable equivalent.

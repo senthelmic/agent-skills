@@ -91,5 +91,12 @@ prompt — either satisfies the requirement.
 | File | Notes |
 |---|---|
 | `.agent-floor/report.md` | Stable path. The team chooses whether to commit it; their git history then becomes the only record. **Never counts toward the floor.** |
+| `.agent-floor/backlog.md` | Stable path. The exhaustive, ranked list of everything worth building here. Merged on re-run, never replaced. **Never counts toward the floor.** |
+
+Optionally, and only if the team creates them:
+
+| File | Notes |
+|---|---|
+| `.agent-floor/baselines/<type>.md` | Written **by the team**, never by this skill. It layers on top of the artefact builder's shipped baseline for that artefact type. |
 
 Nothing else. This skill does not install itself into the repository.

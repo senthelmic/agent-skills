@@ -9,6 +9,11 @@ skill, because a skill serves both agents from one file.
 **Writes to** `.claude/skills/code-review/SKILL.md`, or
 `.claude/commands/code-review.md` if the team prefers a saved prompt.
 
+**Read [../baselines/code-review.md](../baselines/code-review.md) first.** This file is the
+mechanics; the baseline is what a good one looks like, and the team may have
+replaced it. See
+[../reference/baseline-resolution.md](../reference/baseline-resolution.md).
+
 ---
 
 ## Why this one is mandatory
@@ -103,5 +108,5 @@ Every path and command: one lookup each. Anything unverified becomes a
 
 Then confirm capability 4 in the report. Remember: while any `TODO(floor):` line
 remains in this file, the capability is still `absent` — see
-[../floor.md](../floor.md), criterion 1. Say that to the developer plainly, so
+[../../agent-config-floor/floor.md](../../agent-config-floor/floor.md), criterion 1. Say that to the developer plainly, so
 the remaining status does not look like the run failed.

@@ -10,6 +10,11 @@ agents.
 The mandatory code-review artefact has its own generator; see
 [code-review.md](code-review.md).
 
+**Read [../baselines/skill.md](../baselines/skill.md) first.** This file is the
+mechanics; the baseline is what a good one looks like, and the team may have
+replaced it. See
+[../reference/baseline-resolution.md](../reference/baseline-resolution.md).
+
 ---
 
 ## What a skill is for here
