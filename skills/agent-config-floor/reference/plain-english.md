@@ -26,7 +26,7 @@ use that wording. Where it leaves you to write prose, this file governs it.
 
 ---
 
-## The seven rules
+## The eight rules
 
 ### 1. One idea per sentence, and keep sentences short
 
@@ -105,13 +105,44 @@ follow without asking a follow-up question.
 
 ---
 
+### 8. Never explain your own working
+
+**Jargon is not only long words. It is also insider talk about how this tool
+works.** The developer wants to know what to do in their repository. They do not
+want a report on how the run went.
+
+Never tell them what you looked up, what you could not find, which document was
+unclear, which file you read to decide, or how sure you are. Never ask them to
+go and check a result you should have checked.
+
+| Never write | Write instead |
+|---|---|
+| "GitHub's own reference does not say which file it writes" | Nothing. Leave the file unnamed. |
+| "Run `git status` to see which file it wrote" | "When it has finished, run this survey again to see what changed." |
+| "I could not determine this within the reading budget" | "I could not check this. To find out, look at `<file>`." |
+| "Per the reach matrix, thirteen surfaces read this type" | "Copilot Chat in Visual Studio cannot see this." |
+| "This satisfies criterion 3" | "This describes your project, rather than being generic advice." |
+| "I read `package.json` and inferred that..." | "`package.json` lists `bullmq`." |
+
+**When a fact is uncertain, you have two honest choices: leave it out, or ask a
+plain question.** Narrating the uncertainty is never one of them.
+
+This does not conflict with rule 6, and it does not conflict with carrying
+evidence. Evidence is a fact about *their* repository — "`package.json` lists
+`bullmq`" — and it always stays. Your working is a fact about *you*, and it
+always goes.
+
+---
+
 ## The check before you send
 
-Read your output back and ask three questions:
+Read your output back and ask four questions:
 
 1. Is there any sentence over 20 words that could be two sentences?
 2. Is there any word here that a reader would have to look up, and that I did
    not explain when I first used it?
-3. Did I lose a fact while making it simpler?
+3. Is there any sentence here about me, my sources, or how I did the work?
+4. Did I lose a fact while making it simpler?
 
-If the answer to 3 is yes, put the fact back. Rule 6 wins over rules 1 to 5.
+If the answer to 4 is yes, put the fact back. Rule 6 wins over rules 1 to 5.
+Rule 8 removes only sentences about you, never facts about the repository.

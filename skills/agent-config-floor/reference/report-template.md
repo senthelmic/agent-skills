@@ -53,25 +53,29 @@ setup_commands:
 stubs_unfilled: <n>
 ```
 
-## Start here — the setup command
+## Start here — let your agent write the first file
 
 <Only when step 1b found `not run` for at least one targeted agent. Omit this
 whole section when both are `done`.
 
-Name the command, say what it writes, and say what you found. Two or three
-short sentences. Example:
+**Copy the wording out of [init-commands.md](init-commands.md), "The exact
+wording to use". Do not compose your own.** One block per targeted agent that
+came back `not run`, then the closing line. For Copilot, print all three routes
+— VS Code, terminal, other editors — and let the reader pick their own. Never
+assume they use a terminal.
+
+Open with one sentence saying what you found, not what they did:
 
 > There is no `CLAUDE.md` file in this repository. That is the file Claude
-> Code's `/init` command writes. Open Claude Code here and type `/init`. It
-> reads your code and writes a first version for you, which takes about a
-> minute.
+> Code's `/init` command writes.
 
-Then one line saying that running it may fix the first three capabilities
-below, and that re-running this survey afterwards will show what changed.
+Close with one line saying this may fix the first three items in the next
+section, and that it is worth doing before anything else here.
 
-Never write "you did not run `/init`". You cannot see what someone typed. Write
-what file you found or did not find. See
-[init-commands.md](init-commands.md).>
+Never write "you did not run `/init`" — you cannot see what someone typed.
+Never mention what any vendor's documentation does or does not say, and never
+ask the reader to go and check which file appeared. Both break
+[plain-english.md](plain-english.md) rule 8.>
 
 ## What your agents cannot do here yet
 

@@ -16,23 +16,26 @@ replaced it. See
 
 ## Step 1 — try the vendor first
 
-The exact command for each agent, and what each one writes, is in
-[../../agent-config-floor/reference/init-commands.md](../../agent-config-floor/reference/init-commands.md).
-Read it before you pick a line below.
+Read
+[../../agent-config-floor/reference/init-commands.md](../../agent-config-floor/reference/init-commands.md)
+first. It holds every command, what each one writes, and the exact wording to
+give the developer. **Those facts are settled there, so do not look them up and
+do not answer them from memory** — many teams run this behind a firewall, and
+that file is written to work offline. This covers the setup commands only, and
+is not a rule against searching the web elsewhere in a run.
 
-- Target includes Claude Code → tell the developer to type `/init` in Claude
-  Code, then check and complete its output against
+- Target includes Claude Code → give them the Claude Code wording block, then
+  check and complete its output against
   [../../agent-config-floor/floor.md](../../agent-config-floor/floor.md).
-- Target is Copilot CLI → tell them to run `copilot init` in the terminal, or
-  type `/init` inside a Copilot CLI session.
-- Target is Copilot on VS Code → tell them to type `/init` in the Copilot Chat
-  box, then check and complete its output.
-- Target is Copilot on JetBrains, Visual Studio or Xcode, or no vendor
-  generator is available → generate it yourself, below.
+- Target includes Copilot → give them the Copilot wording block, **all three
+  routes**, and let them pick the one that matches how they work.
+- **They use Copilot in Visual Studio, JetBrains, Eclipse or Xcode** → there is
+  no such command for them. Say so in one line and generate it yourself, below.
+  Never send someone to a command that does not exist on their surface.
 
-**You cannot type a slash command for them.** It runs inside their agent
-session, not from a tool call. Say which command to type, say what it will
-write, and wait for them to tell you it is done.
+**You cannot type a slash command for them.** It runs inside their own agent
+session or their own terminal, not from a tool call. Give them the wording, and
+wait for them to tell you it is done.
 
 Checking the vendor's output is not optional. `/init` writes a good description
 of the code and often says nothing about test commands or conventions.

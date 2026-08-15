@@ -54,22 +54,31 @@ descend to make sense of it.
 Do this before anything else, because it is the cheapest fix a team can make and
 it changes what the rest of the report should say to them.
 
-Each agent has its own command that writes a first instructions file for a
-repository. Claude Code has `/init`. GitHub Copilot has `copilot init` and
-`/init`. Follow [reference/init-commands.md](reference/init-commands.md): what
-each command is, which files to look for, the three verdicts, and the exact
-wording to use.
+Each agent has a command that writes a first instructions file for a repository.
+Follow [reference/init-commands.md](reference/init-commands.md). It holds the
+commands, which files to look for, the three verdicts, and the exact wording to
+give the developer.
 
-This check reads nothing new. Every file it looks at is already in the step 1
-budget.
+**The setup commands are already settled in that file, so do not look them up
+and do not answer them from memory.** It was checked against the vendors' own
+documentation, and it works on a machine with no network access — many teams run
+this skill behind a firewall.
+
+That applies to the setup commands and nothing else. It is not a rule against
+searching the web during a run. See "You already have these answers" in that
+file for when a search is fine.
+
+This check reads nothing new either. Every file it looks at is already in the
+step 1 budget.
 
 Record for each targeted agent: `done` or `not run`, and which file you looked
 for. It goes at the top of the report in step 7.
 
-**Two limits, both in that reference file, both important.** You cannot see
+**Three limits, all in that reference file, all important.** You cannot see
 whether a person typed a command, so never state that they did not — state what
-file you found or did not find. And this check never counts toward the floor: it
-changes no capability's status.
+file you found. Not every surface has such a command, so give all the routes and
+let the developer pick their own rather than assuming they use a terminal. And
+this check never counts toward the floor: it changes no capability's status.
 
 ---
 

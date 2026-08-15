@@ -34,12 +34,15 @@ The cap on stubs is about your file tree, not about what you are told. Anything
 above the cap is in the backlog with its evidence, and filling a stub frees a
 slot for the next survey.
 
-Before all three, the survey checks one thing: has each agent's own setup
-command been run here? Claude Code has `/init`, and GitHub Copilot has
-`copilot init`. Each one reads your repository and writes a first instructions
-file for you, in about a minute. If that file is not here, the report says so at
-the top, because it is the cheapest fix available and it can move three of the
-six capabilities on its own.
+Before all three, the survey checks one thing: **can your agent write the first
+file for you?** Claude Code and GitHub Copilot each have a command that reads
+your repository and writes a first instructions file, in about a minute. If that
+file is not here, the report says so at the top, because it is the cheapest fix
+available and it can move three of the six capabilities on its own.
+
+The report gives you every route — in Claude Code, in VS Code, in a terminal —
+and says plainly when your editor has no such command. The commands are written
+into the skill itself, so this check works with no web access.
 
 The team works through the backlog at whatever pace suits them. Nothing forces
 them past the survey run.
@@ -186,6 +189,12 @@ report, the backlog, every question it asks, and the artefacts it writes.
 
 It does **not** cover file paths, command names, code samples or frontmatter
 keys. Those stay exactly as they are.
+
+It also means the skills never explain their own working. You will not be told
+what they looked up, what they could not find, which document was unclear, or
+how sure they are. Jargon is not only long words — it is also insider talk about
+how a tool works. If something is uncertain, the skills leave it out or ask you
+a plain question.
 
 **Simple wording never means fewer facts.** The rule is that a finding must be
 readable, not that it must be short or soft. Where something is genuinely

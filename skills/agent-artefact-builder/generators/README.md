@@ -43,13 +43,18 @@ re-check, authorise an unverified assertion, or drop required frontmatter.
 
 ## The rule that applies to all of them
 
-**Prefer the vendor's own generator** where one reaches the developer's surface
-— Claude Code's `/init`, Copilot CLI's `copilot init`, VS Code Copilot Chat's
-`/init`. See
+**Prefer the vendor's own generator** where one reaches the developer's surface.
+The commands, and the surfaces that have none, are in
 [../../agent-config-floor/reference/init-commands.md](../../agent-config-floor/reference/init-commands.md).
-The vendor reads a codebase better than our prompt does. Generate it ourselves
-only where no vendor generator reaches that surface. That fallback competes with
-nothing; reporting a hole instead of filling it would fail the team.
+Take them from that file rather than looking them up or answering from memory —
+they are already settled there, and only there. The vendor reads a codebase
+better than our prompt does.
+
+Generate it ourselves only where no vendor generator reaches that surface —
+Copilot in Visual Studio, JetBrains, Eclipse or Xcode has no such command at
+all. That fallback competes with nothing; reporting a hole instead of filling it
+would fail the team, and sending someone to a command their editor does not have
+is worse than either.
 
 **Every generator writes prose in plain English**, following
 [../../agent-config-floor/reference/plain-english.md](../../agent-config-floor/reference/plain-english.md).
