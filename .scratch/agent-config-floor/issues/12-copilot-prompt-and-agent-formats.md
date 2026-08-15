@@ -1,7 +1,7 @@
 # What Copilot's saved-prompt and custom-agent formats actually are
 
 Type: research
-Status: open
+Status: open — phase-one half answered 2026-08-14; translator loss analysis still open
 Blocked by: 04
 
 ## Question
@@ -27,3 +27,46 @@ The audit needs less than the translator does. Separate the two in the answer, s
 
 - **Needed for phase one:** the exact paths, and the frontmatter that makes a file valid. Nothing more — phase one checks presence plus well-formedness.
 - **Needed for phase four:** the full field-by-field comparison and the loss analysis.
+
+## Answer — the phase-one half only
+
+Researched 2026-08-14. Full working and every citation:
+[../research/copilot-formats.md](../research/copilot-formats.md).
+
+**Custom agents: `.github/agents/<name>.agent.md`.** Confirmed three ways —
+GitHub's cloud-agent template ("`my-agent.agent.md` in the `.github/agents`
+directory"), the Copilot CLI documentation, and `github/awesome-copilot`, which
+holds 226 `*.agent.md` files and zero `*.chatmode.md`. Only `description` is
+required in the frontmatter. `.chatmode.md` is the **superseded name for the
+same thing**, not a parallel path: accept it when auditing, never generate it.
+
+**Saved prompts: `.github/prompts/<name>.prompt.md` — path confirmed, reach far
+narrower than assumed.** Read by VS Code, Visual Studio and JetBrains only, and
+documented as public preview. Not github.com, not the cloud agent, not code
+review, not Copilot CLI. This ticket's suspicion that "reach may be much
+narrower" was correct.
+
+**Two findings outside this ticket's scope that the research turned up anyway,
+both affecting shipped behaviour:**
+
+1. GitHub restructured the instruction matrix. `CLAUDE.md`, `AGENTS.md` and
+   `GEMINI.md` are now **one type with identical reach**, which weakens the
+   asymmetry in map constraint 4 without overturning its conclusion —
+   `CLAUDE.md` alone still leaves nine of eighteen surfaces blind.
+2. A fifth type, `.github/instructions/**/*.instructions.md`, is read by
+   thirteen of the eighteen surfaces and was **absent from the shipped reach
+   matrix entirely**. A team using it was being told, falsely, that its agents
+   see nothing.
+
+**Verdict on the ticket's own question:** lossy conversion remains acceptable
+for phase 1. The paths and required frontmatter are now known, which is all
+phase 1 needs.
+
+**What stays open.** The field-by-field loss analysis, and whether the loss
+reopens ticket 04. Status stays `open` for that reason.
+
+**One thing for phase 2 to decide, surfaced by this research.** For a
+Copilot-targeting team, a saved prompt buys three preview-status editor chat
+windows while a custom agent buys the cloud agent, code review and the CLI. If
+the floor ever has to demand only one of capabilities 5 and 6, agents are the
+better buy. Not decided here.

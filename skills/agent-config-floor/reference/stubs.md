@@ -37,6 +37,11 @@ description: Unfilled floor stub. Ignore this — it contains no guidance.
 TODO(floor): ...
 ```
 
+Both keys are needed. Copilot requires `name` **and** `description` on a
+`SKILL.md`, and `name` must be lowercase with hyphens — verified against
+GitHub's skills documentation on 2026-08-14. A Copilot custom agent requires
+only `description`, but writing both costs nothing and keeps one template.
+
 For a saved prompt at `.claude/commands/<name>.md`, use the same `description`
 line without `name`.
 
@@ -89,7 +94,7 @@ any of them would hide part of the floor.
 | 6 | `.claude/agents/<name>.md` | a sub-agent for a task worth handing to a separate agent |
 
 For target `copilot`, use `.github/skills/`, `.github/prompts/<name>.prompt.md`
-and `.github/agents/<name>.md` instead. See [paths.md](paths.md).
+and `.github/agents/<name>.agent.md` instead. See [paths.md](paths.md).
 
 ### Recommended artefacts — capped at five stub files
 

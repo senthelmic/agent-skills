@@ -3,7 +3,7 @@
 Fills capability 6. **One sub-agent per run.**
 
 **Writes to** `.claude/agents/<name>.md`, and — when the target is `both` — a
-translated copy at `.github/agents/<name>.md`.
+translated copy at `.github/agents/<name>.agent.md`.
 
 **Not portable.** Same doubling as saved prompts, and the routing behaviour
 differs between the two agents even when the file translates cleanly.
@@ -83,7 +83,7 @@ Rules:
 
 ## Step 4 — translate, if the target is `both`
 
-Write `.github/agents/<name>.md`, following
+Write `.github/agents/<name>.agent.md`, following
 [../../agent-config-floor/reference/copilot-translation.md](../../agent-config-floor/reference/copilot-translation.md).
 
 `name`, `description` and the body carry over. Tool names differ — drop what has

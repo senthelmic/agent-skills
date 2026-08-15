@@ -1,8 +1,11 @@
 # Claude-native to Copilot translation
 
 **Best-effort in phase 1, and marked as such in the output.** The conversion is
-lossy. The loss is accepted, not solved. Phase 2 sharpens this once the research
-ticket on Copilot's prompt and agent formats closes.
+lossy. The loss is accepted, not solved.
+
+The paths and frontmatter below were verified against GitHub's and VS Code's own
+documentation on 2026-08-14. What has **not** been done is the full field-by-field
+loss analysis; that is phase 2.
 
 Whenever you write a translated file, put this line at the top of it:
 
@@ -56,15 +59,21 @@ answered.
 
 ## Sub-agents / custom agents
 
-`.claude/agents/<name>.md` → `.github/agents/<name>.md`.
+`.claude/agents/<name>.md` → `.github/agents/<name>.agent.md`.
 
 | Claude Code | Copilot | Loss |
 |---|---|---|
 | Frontmatter `name` | `name` | Carries over. |
 | Frontmatter `description` (also the routing signal) | `description` | Carries over, but routing behaviour differs between the agents. Do not assume the same delegation happens. |
 | Frontmatter `tools` | `tools` | Tool names differ. Drop what has no counterpart and note it. |
-| Frontmatter `model` | no reliable equivalent | Drop it. |
+| Frontmatter `model` | `model` | Carries over; the model names differ, so drop the value rather than translating it. |
 | Body prompt | Body prompt | Carries over. |
+
+**`description` is the only required field.** Copilot also accepts `name`,
+`argument-hint`, `tools`, `agents`, `model`, `user-invocable`,
+`disable-model-invocation`, `target`, `mcp-servers`, `handoffs` and `hooks`.
+Two of those — `argument-hint` and `handoffs` — are documented as unsupported on
+github.com, so do not rely on them in a generated file.
 
 ---
 

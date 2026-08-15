@@ -152,6 +152,15 @@ Use [reference/reach-matrix.md](reference/reach-matrix.md) to decide whether an
 artefact reaches the target agents. **Accept any layout that demonstrably
 reaches them.** Do not fail a team for an unusual but working layout.
 
+Three layouts are easy to get wrong, so check them by name before concluding
+that instructions are absent:
+
+- `.github/instructions/**/*.instructions.md` — **counts.** Thirteen of the
+  eighteen Copilot surfaces read it.
+- `AGENTS.md` — **counts**, and reaches exactly what `CLAUDE.md` reaches.
+- `.github/agents/<name>.chatmode.md` — **counts.** It is the old name for a
+  custom agent.
+
 Mark every finding that rests on criterion 3 (*specific*) as a **judgement
 call**. Findings under criteria 1, 2 and 4 are facts.
 
