@@ -11,6 +11,12 @@ opt-in — see step 7.
 
 ## Step 1 — confirm which artefact, and take the developer's input
 
+Before anything else, read
+[../agent-config-floor/reference/plain-english.md](../agent-config-floor/reference/plain-english.md)
+once. It governs every sentence this run produces — the questions you ask in
+step 4, the prose you write in step 5, and the summary you give in step 8. It is
+not optional and it does not depend on which model is running this.
+
 **Two things arrive at the start of a run, and both matter.**
 
 ### The artefact
@@ -145,9 +151,14 @@ all four.
 Apply the baseline resolved in step 2 as you write.
 
 **Prefer the vendor's own generator** where one reaches the developer's surface.
-Claude Code has `/init`; VS Code has "Chat: Generate Instructions". The vendor
-reads a codebase better than our prompt does. Route the developer to it, then
-check and complete the result against the rubric in
+Claude Code has `/init`, Copilot CLI has `copilot init`, and Copilot Chat in VS
+Code has `/init`. The commands, what each one writes, and their limits are in
+[../agent-config-floor/reference/init-commands.md](../agent-config-floor/reference/init-commands.md).
+Read that file before writing an instructions file by hand.
+
+The vendor reads a codebase better than our prompt does. Route the developer to
+it — you cannot type a slash command for them, so tell them which one to type
+and wait. Then check and complete the result against the rubric in
 [../agent-config-floor/floor.md](../agent-config-floor/floor.md) and against the
 resolved baseline.
 
@@ -215,6 +226,12 @@ counts as `absent` — see
 [../agent-config-floor/floor.md](../agent-config-floor/floor.md), criterion 1.
 Say that plainly, so a remaining `absent` does not read as the run having
 failed.
+
+If this run produced a real `CLAUDE.md` or a real Copilot instructions file —
+whether the vendor's `/init` wrote it or you did — set the matching
+`setup_commands:` line in that YAML header to `done`, and delete the report's
+"Start here — the setup command" section for that agent. Leaving it there tells
+the team to do something they have already done.
 
 Then tell the developer:
 

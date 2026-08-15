@@ -27,6 +27,10 @@ The rules from [report-template.md](report-template.md) hold here too:
   real usage, because that needs reading the budget forbids.
 - **Never assert what you did not verify.** A row you are unsure about is
   written with what you actually saw, not with what you assume it means.
+- **Plain English**, following [plain-english.md](plain-english.md). This covers
+  the prose around the table and the `Evidence` cell in each row. Column
+  headings, the `Type` values and the `Status` values are fixed and are not
+  rewritten. Simple wording never means fewer rows.
 
 ---
 

@@ -21,6 +21,12 @@ contains no guidance. Run the floor skill and pick this artefact to fill it.
 
 No headings, no template body, no example sections.
 
+The `<what this artefact is for>` half is prose a person reads, so it follows
+[plain-english.md](plain-english.md): one short sentence, no jargon, no
+metaphor. The fixed wording after it is fixed — do not reword it, because the
+`TODO(floor):` marker and the sentence around it are what the next survey run
+matches on.
+
 ### Frontmatter, where the path requires it
 
 A `SKILL.md` or a sub-agent file with no frontmatter is malformed, and the agent

@@ -44,7 +44,14 @@ re-check, authorise an unverified assertion, or drop required frontmatter.
 ## The rule that applies to all of them
 
 **Prefer the vendor's own generator** where one reaches the developer's surface
-— Claude Code's `/init`, VS Code's "Chat: Generate Instructions". The vendor
-reads a codebase better than our prompt does. Generate it ourselves only where
-no vendor generator reaches that surface. That fallback competes with nothing;
-reporting a hole instead of filling it would fail the team.
+— Claude Code's `/init`, Copilot CLI's `copilot init`, VS Code Copilot Chat's
+`/init`. See
+[../../agent-config-floor/reference/init-commands.md](../../agent-config-floor/reference/init-commands.md).
+The vendor reads a codebase better than our prompt does. Generate it ourselves
+only where no vendor generator reaches that surface. That fallback competes with
+nothing; reporting a hole instead of filling it would fail the team.
+
+**Every generator writes prose in plain English**, following
+[../../agent-config-floor/reference/plain-english.md](../../agent-config-floor/reference/plain-english.md).
+That covers the artefact's own body text and every `TODO(floor):` line in it.
+Code samples, paths, commands and frontmatter keys are left exactly as they are.

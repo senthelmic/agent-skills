@@ -65,8 +65,8 @@ and no telemetry.
 one against the location you loaded *this* file from, whether that was a URL or
 a local path. If you fetched this over the network, fetch the linked file from
 the same directory. Do not fetch a file until you actually need it — the survey
-run needs only `floor.md`, `survey-run.md` and the four files those two point
-to.
+run needs only `floor.md`, `survey-run.md`, `reference/plain-english.md` and the
+files those point to.
 
 **Always latest, never pinned.** The floor's version travels with the skill, so
 a team learns the floor moved by running it, never by being told.
@@ -90,6 +90,13 @@ a team learns the floor moved by running it, never by being told.
 7. **Never assert what you did not verify.** Any claim you cannot check against
    the code is written into the artefact as a `TODO(floor):` question for the
    developer, not as a statement of fact.
+8. **Write in plain English.** Everything this run says to the developer, and
+   every piece of prose it writes into a file, must be readable by someone whose
+   first language is not English. Short sentences, no idioms, no metaphors, and
+   every technical term explained the first time it is used. This never means
+   fewer facts or a softer finding. Follow
+   [reference/plain-english.md](reference/plain-english.md), whichever model is
+   running this.
 
 ## Step 1 — ask the one survey question
 
@@ -147,9 +154,12 @@ technology stack: a code-review skill or saved prompt.** It is mandatory to
 | [reference/backlog-template.md](reference/backlog-template.md) | The exact shape of `.agent-floor/backlog.md`, and the merge rules. |
 | [reference/stubs.md](reference/stubs.md) | The stub format and the stub set. |
 | [reference/copilot-translation.md](reference/copilot-translation.md) | Claude-native to Copilot conversion, and what is lost. |
+| [reference/init-commands.md](reference/init-commands.md) | Each agent's own setup command, what it writes, and how to check whether it has been run here. |
+| [reference/plain-english.md](reference/plain-english.md) | How both skills write. Read once per run, before writing anything. |
 
-`floor.md`, `paths.md`, `copilot-translation.md` and `backlog-template.md` are
-also read by the builder skill. They are shared, not copied — copies drift.
+`floor.md`, `paths.md`, `copilot-translation.md`, `backlog-template.md`,
+`init-commands.md` and `plain-english.md` are also read by the builder skill.
+They are shared, not copied — copies drift.
 
 ## What this skill deliberately does not do
 

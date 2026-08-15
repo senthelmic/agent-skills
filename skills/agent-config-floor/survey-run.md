@@ -9,10 +9,15 @@ unchanged repository must produce the same gap list.
 
 ---
 
-## Step 0 — the target
+## Step 0 — the target, and how you will write
 
-You should already have it from [SKILL.md](SKILL.md) step 1. If not, ask now.
-Default `both`.
+You should already have the target from [SKILL.md](SKILL.md) step 1. If not, ask
+now. Default `both`.
+
+Read [reference/plain-english.md](reference/plain-english.md) once, now, before
+you write anything at all. It governs every sentence this run produces — in the
+session, in the report, in the backlog and in every stub. It is not optional and
+it does not depend on which model is running this.
 
 ---
 
@@ -41,6 +46,30 @@ interesting-looking imports. When you cannot answer inside this budget, write
 
 If a directory listing at depth 2 is very large, list it and count it; do not
 descend to make sense of it.
+
+---
+
+## Step 1b — the setup-command check
+
+Do this before anything else, because it is the cheapest fix a team can make and
+it changes what the rest of the report should say to them.
+
+Each agent has its own command that writes a first instructions file for a
+repository. Claude Code has `/init`. GitHub Copilot has `copilot init` and
+`/init`. Follow [reference/init-commands.md](reference/init-commands.md): what
+each command is, which files to look for, the three verdicts, and the exact
+wording to use.
+
+This check reads nothing new. Every file it looks at is already in the step 1
+budget.
+
+Record for each targeted agent: `done` or `not run`, and which file you looked
+for. It goes at the top of the report in step 7.
+
+**Two limits, both in that reference file, both important.** You cannot see
+whether a person typed a command, so never state that they did not — state what
+file you found or did not find. And this check never counts toward the floor: it
+changes no capability's status.
 
 ---
 
@@ -203,6 +232,10 @@ no row is ever deleted.
 Write `.agent-floor/report.md`, following
 [reference/report-template.md](reference/report-template.md) exactly.
 
+The setup-command verdict from step 1b goes at the top, above the capabilities.
+A team that has not run `/init` yet should read that line first, because running
+it may fix three capabilities in one minute.
+
 The report states how many stubs remain unfilled. A repository sitting at eight
 empty stubs is told so plainly and is not counted as having made progress. The
 report does not repeat the backlog; it points at it.
@@ -216,8 +249,11 @@ building.
 
 ## Step 8 — end the run
 
-Tell the developer:
+Tell the developer, in plain English:
 
+0. **If step 1b came back `not run` for either agent, say this first**, before
+   the report and before the backlog. Name the command to type, and say what it
+   will write. One or two sentences, no more.
 1. Where the report is, and where the backlog is.
 2. The list of unfilled stubs, so they can pick one.
 3. That filling one is a separate run, done by a separate skill, and they can do

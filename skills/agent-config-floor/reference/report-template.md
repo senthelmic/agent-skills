@@ -25,6 +25,12 @@ not
 
 Status values are `absent`, `present`, `unverifiable`. **Never `fail`.**
 
+**Every sentence of prose in this report follows
+[plain-english.md](plain-english.md).** Short sentences, no idioms, no
+metaphors, every technical term explained on first use. The YAML header and the
+section headings below are fixed and are not rewritten. Simple wording never
+means fewer findings.
+
 ---
 
 ## The exact format
@@ -41,8 +47,31 @@ capabilities:
   skills: absent | present | unverifiable
   saved_prompts: absent | present | unverifiable
   sub_agents: absent | present | unverifiable
+setup_commands:
+  claude_init: done | not_run | not_targeted
+  copilot_init: done | not_run | not_targeted
 stubs_unfilled: <n>
 ```
+
+## Start here — the setup command
+
+<Only when step 1b found `not run` for at least one targeted agent. Omit this
+whole section when both are `done`.
+
+Name the command, say what it writes, and say what you found. Two or three
+short sentences. Example:
+
+> There is no `CLAUDE.md` file in this repository. That is the file Claude
+> Code's `/init` command writes. Open Claude Code here and type `/init`. It
+> reads your code and writes a first version for you, which takes about a
+> minute.
+
+Then one line saying that running it may fix the first three capabilities
+below, and that re-running this survey afterwards will show what changed.
+
+Never write "you did not run `/init`". You cannot see what someone typed. Write
+what file you found or did not find. See
+[init-commands.md](init-commands.md).>
 
 ## What your agents cannot do here yet
 

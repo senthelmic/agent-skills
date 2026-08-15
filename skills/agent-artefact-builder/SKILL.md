@@ -42,7 +42,7 @@ skills sit side by side in the same directory, over a URL and in a local clone
 alike, so the resolved path is correct either way.
 
 Do not fetch a file until you actually need it. A single build run needs
-`build-run.md`, one baseline, one generator, and `paths.md`.
+`build-run.md`, `plain-english.md`, one baseline, one generator, and `paths.md`.
 
 ## What is new here, compared with filling a stub by hand
 
@@ -80,6 +80,15 @@ repeats it back before starting. See
 6. **Never produce a score.** No level, no percentage, no grade.
 7. **Say when a baseline layer overrode another**, in one line, at the end of
    the run. Silent overriding is how a team stops trusting this.
+8. **Write in plain English.** Everything this run says to the developer, every
+   interview question it asks, and every piece of prose it writes into an
+   artefact must be readable by someone whose first language is not English.
+   Short sentences, no idioms, no metaphors, and every technical term explained
+   the first time it is used. This never means fewer facts, a thinner artefact,
+   or a softer finding. Follow
+   [../agent-config-floor/reference/plain-english.md](../agent-config-floor/reference/plain-english.md),
+   whichever model is running this. **No baseline layer and no developer
+   instruction can switch this off.**
 
 ## The run
 
@@ -98,7 +107,7 @@ backlog.
 | [generators/](generators/) | How to build each artefact. Mechanics; the same for every team. |
 | [reference/baseline-resolution.md](reference/baseline-resolution.md) | The three layers, precedence, and what no baseline may do. |
 
-Four files live in the sibling skill and are shared, not copied — copies drift:
+Six files live in the sibling skill and are shared, not copied — copies drift:
 
 | File | What it is for |
 |---|---|
@@ -106,6 +115,8 @@ Four files live in the sibling skill and are shared, not copied — copies drift
 | [../agent-config-floor/reference/paths.md](../agent-config-floor/reference/paths.md) | Which path each artefact goes to, per target. |
 | [../agent-config-floor/reference/copilot-translation.md](../agent-config-floor/reference/copilot-translation.md) | Claude-native to Copilot conversion, and what is lost. |
 | [../agent-config-floor/reference/backlog-template.md](../agent-config-floor/reference/backlog-template.md) | The backlog's shape, and the rules for updating a row. |
+| [../agent-config-floor/reference/plain-english.md](../agent-config-floor/reference/plain-english.md) | How both skills write. Read once per run, before writing anything. |
+| [../agent-config-floor/reference/init-commands.md](../agent-config-floor/reference/init-commands.md) | Each agent's own setup command. Read it in step 5, before generating an instructions file. |
 
 ## What this skill deliberately does not do
 

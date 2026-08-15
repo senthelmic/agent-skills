@@ -136,6 +136,21 @@ says when to use it.
 
 ---
 
+## The setup-command check is not a capability
+
+Each agent has its own command that writes a first instructions file — Claude
+Code's `/init`, Copilot's `copilot init`. The survey run checks whether that
+command's output is here, and the report says so before anything else. See
+[reference/init-commands.md](reference/init-commands.md).
+
+**It is not a seventh capability.** It never counts toward the floor, it has no
+status value in the list below, and it never changes any capability's status. It
+is there because running it is usually the fastest way to move capabilities 1, 2
+and 3 from `absent` to `present`, and a team deserves to be told the cheap fix
+first.
+
+---
+
 ## Status values
 
 Report each capability as exactly one of:

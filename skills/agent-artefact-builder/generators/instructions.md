@@ -16,12 +16,23 @@ replaced it. See
 
 ## Step 1 — try the vendor first
 
-- Target includes Claude Code → tell the developer to run `/init`, then check
-  and complete its output against [../../agent-config-floor/floor.md](../../agent-config-floor/floor.md).
-- Target is Copilot on VS Code → tell them to run "Chat: Generate
-  Instructions", then check and complete its output.
+The exact command for each agent, and what each one writes, is in
+[../../agent-config-floor/reference/init-commands.md](../../agent-config-floor/reference/init-commands.md).
+Read it before you pick a line below.
+
+- Target includes Claude Code → tell the developer to type `/init` in Claude
+  Code, then check and complete its output against
+  [../../agent-config-floor/floor.md](../../agent-config-floor/floor.md).
+- Target is Copilot CLI → tell them to run `copilot init` in the terminal, or
+  type `/init` inside a Copilot CLI session.
+- Target is Copilot on VS Code → tell them to type `/init` in the Copilot Chat
+  box, then check and complete its output.
 - Target is Copilot on JetBrains, Visual Studio or Xcode, or no vendor
   generator is available → generate it yourself, below.
+
+**You cannot type a slash command for them.** It runs inside their agent
+session, not from a tool call. Say which command to type, say what it will
+write, and wait for them to tell you it is done.
 
 Checking the vendor's output is not optional. `/init` writes a good description
 of the code and often says nothing about test commands or conventions.

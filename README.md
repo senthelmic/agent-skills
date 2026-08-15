@@ -34,6 +34,13 @@ The cap on stubs is about your file tree, not about what you are told. Anything
 above the cap is in the backlog with its evidence, and filling a stub frees a
 slot for the next survey.
 
+Before all three, the survey checks one thing: has each agent's own setup
+command been run here? Claude Code has `/init`, and GitHub Copilot has
+`copilot init`. Each one reads your repository and writes a first instructions
+file for you, in about a minute. If that file is not here, the report says so at
+the top, because it is the cheapest fix available and it can move three of the
+six capabilities on its own.
+
 The team works through the backlog at whatever pace suits them. Nothing forces
 them past the survey run.
 
@@ -78,7 +85,7 @@ ln -s "$(pwd)/skills/agent-artefact-builder" ~/.claude/skills/agent-artefact-bui
 Claude Code then loads them like any other skill and routes from the description
 in their frontmatter.
 
-**Link both, not one.** The builder reads four shared files from
+**Link both, not one.** The builder reads six shared files from
 `../agent-config-floor/`, which only resolves if both sit side by side.
 
 A symlink means edits in this repository take effect immediately, with no
@@ -157,7 +164,7 @@ end.** Silent overriding is how you stop trusting a tool.
 
 ### What no baseline can change
 
-Five things are rubric rather than taste, and no layer can waive them:
+Six things are rubric rather than taste, and no layer can waive them:
 
 - every factual claim is checked against the code before it is written
 - a claim that cannot be checked becomes a `TODO(floor):` question, never an
@@ -166,6 +173,28 @@ Five things are rubric rather than taste, and no layer can waive them:
   style choice
 - no score, grade or percentage appears anywhere
 - at most six questions per run
+- everything is written in plain English — see below
+
+---
+
+## Plain English, in both skills
+
+Both skills write for someone whose first language is not English. Short
+sentences, no idioms, no metaphors, and every technical term explained the first
+time it is used. That covers what the agent says to you in the session, the
+report, the backlog, every question it asks, and the artefacts it writes.
+
+It does **not** cover file paths, command names, code samples or frontmatter
+keys. Those stay exactly as they are.
+
+**Simple wording never means fewer facts.** The rule is that a finding must be
+readable, not that it must be short or soft. Where something is genuinely
+complicated, the skills use more short sentences rather than dropping the
+detail.
+
+This holds whichever model runs the skill, and no baseline layer and no
+instruction you type can switch it off. The rules are in
+[skills/agent-config-floor/reference/plain-english.md](skills/agent-config-floor/reference/plain-english.md).
 
 Everything else is negotiable.
 

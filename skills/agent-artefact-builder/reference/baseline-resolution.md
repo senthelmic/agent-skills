@@ -90,13 +90,21 @@ developer asking for one of them to be waived is told plainly that it cannot be:
 4. **No score, no grade, no percentage** appears in any output.
 5. **The six-question cap holds.** A baseline may change *which* six, never how
    many.
+6. **Plain English holds.** Every question asked and every piece of prose
+   written follows
+   [../../agent-config-floor/reference/plain-english.md](../../agent-config-floor/reference/plain-english.md).
+   A baseline may set tone, ordering, length and what to include. It may not
+   bring back jargon, idioms or long sentences. A developer who asks for
+   "denser, more technical writing" gets a shorter artefact, not a harder one to
+   read — the person who inherits this file may not be the person who asked.
 
 Everything else is negotiable.
 
-**Why these five and not others.** Each one is load-bearing for a promise made
+**Why these six and not others.** Each one is load-bearing for a promise made
 to the team elsewhere: that this toolkit does not assert what it did not check,
 that what it writes actually loads, that it invites rather than ranks, and that
-a run stays small enough to finish. Style choices do not carry those promises,
+a run stays small enough to finish, and that the person who has to read the
+output can read it. Style choices below that line do not carry those promises,
 so style is where a team's own judgement belongs.
 
 ---
